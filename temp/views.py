@@ -1,6 +1,9 @@
 ﻿from django.shortcuts import render
 from django.views import generic
 from .models import Post
+from django.http import Http404
+from django.db.models import F
+
 # Create your views here.
 def index(request):
     """
@@ -20,6 +23,18 @@ def index(request):
         'index.html',
         context={'num_sights':num_sights, 'most_visited':most_visited, 'mv_city':mv_city}
     )
+def sight_view(request,id):
+    try:
+        sight=Post.objects.get(pk=id)
+        sight.times_visited = F('times_visited')+1
+        sight.save()
+    except Post.DoesNotExist:
+        raise Http404("Запрошенной достопримечательности не существует")
+    return render(
+        request,
+        'sight.html',
+        context={'sight': sight}
+    )
 class CityListView(generic.ListView):
     """
     Отображает список достопримечательностей в конкретном городе.
@@ -32,4 +47,3 @@ class CityListView(generic.ListView):
         context = super(CityListView, self).get_context_data(**kwargs)
         context['city'] = self.kwargs['city']
         return context
-   

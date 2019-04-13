@@ -8,7 +8,7 @@
 
       {% for sight in post_list %}
       <li>
-        <a href="{{ city_list.get_absolute_url }}">{{ sight.name }}</a> ({{ sight.type }}) <span class="visit-num">Посещений: {{ sight.times_visited }}</span>
+        <a href="{{ sight.get_absolute_url }}">{{ sight.name }}</a> ({{ sight.get_type_display }}) <span class="visit-num">Посещений: {{ sight.times_visited }}</span>
       </li>
       {% endfor %}
 

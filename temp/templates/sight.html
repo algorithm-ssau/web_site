@@ -1,0 +1,7 @@
+﻿{% extends "base_temp.html" %}
+
+{% block content %}<h1> {{ sight.name }} </h1>
+<h2><span class="text-hlight-1">{{ sight.city }}</span></h2>
+<p class="visit-num">{{ sight.get_type_display }}</p><br />
+<p>{{ sight.text }}</p>
+{% endblock %}

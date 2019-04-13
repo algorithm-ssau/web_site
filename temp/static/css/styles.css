@@ -1,7 +1,8 @@
 h1 {font-family:Verdana, Geneva, sans-serif; font-size:48px; word-spacing:3px}
 h3 {font-family:Georgia, "Times New Roman", Times, serif; font-size:18px; word-spacing:8px; color:#FFF666; background-color:#930000}
-h2 {font-family:Verdana, Geneva, sans-serif; font-size:24px; word-spacing:7px; color:#FFF; background-color:#066FFF}
+h2 {font-family:Verdana, Geneva, sans-serif; font-size:24px; word-spacing:7px; color:#FFF;}
 p {font-family:Arial, Helvetica, sans-serif; font-size:15px; word-spacing:5px}
 div {font-family:Arial, Helvetica, sans-serif; font-size:15px; word-spacing:5px}
 .li1 {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:18px}
+.text-hlight-1 { padding: 3px; background-color:#385}
 .visit-num {color: gray}
