@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse #Used to generate URLs by reversing the URL patterns
 
+
 class Post(models.Model):
     """
     Информация о туристическом объекте.
@@ -23,12 +24,10 @@ class Post(models.Model):
     city = models.CharField('Город', max_length=50)
     type = models.CharField('Вид', max_length=1, choices=SIGHT_TYPES)
     times_visited = models.IntegerField()
-
     class Meta:
         ordering = ['city', 'type'] # либо times_visited
         verbose_name = 'Достопримечательность'
-
+    def get_absolute_url(self):
+        return reverse('sight', args=[str(self.id)])
     def __str__(self):
         return self.name
-
-

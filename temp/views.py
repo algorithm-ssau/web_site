@@ -1,4 +1,5 @@
 ﻿from django.shortcuts import render
+from django.views import generic
 from .models import Post
 # Create your views here.
 def index(request):
@@ -19,3 +20,16 @@ def index(request):
         'index.html',
         context={'num_sights':num_sights, 'most_visited':most_visited, 'mv_city':mv_city}
     )
+class CityListView(generic.ListView):
+    """
+    Отображает список достопримечательностей в конкретном городе.
+    """
+    model = Post
+
+    def get_queryset(self):
+        return Post.objects.filter(city__iexact=self.kwargs['city'])
+    def get_context_data(self, **kwargs):
+        context = super(CityListView, self).get_context_data(**kwargs)
+        context['city'] = self.kwargs['city']
+        return context
+   

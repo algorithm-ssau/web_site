@@ -1,0 +1,19 @@
+﻿{% extends "base_temp.html" %}
+
+{% block content %}
+    <h1>Достопримечательности города {{ city }}</h1>
+    {% if post_list %}
+    <p>В списке приведены все достопримечательности в этом городе.</p>
+    <ul>
+
+      {% for sight in post_list %}
+      <li>
+        <a href="{{ city_list.get_absolute_url }}">{{ sight.name }}</a> ({{ sight.type }}) <span class="visit-num">Посещений: {{ sight.times_visited }}</span>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Нет информации о введенном вами городе</p>
+    {% endif %}       
+{% endblock %}
