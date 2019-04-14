@@ -16,7 +16,7 @@ class Post(models.Model):
         ('d', 'Музеи'),
         ('e', 'Театры'),
         ('f', 'Улицы, площади'),
-        ('g', 'Парки')
+        ('g', 'Природа, парки') # "Природа"
     )
     
     name = models.CharField('Название', max_length=200) 
@@ -31,3 +31,16 @@ class Post(models.Model):
         return reverse('sight', args=[str(self.id)])
     def __str__(self):
         return self.name
+
+class PostImage(models.Model):
+    """
+    Изображение (фотография) туристического объекта.
+    У достопримечательности может быть (и, как правило, должно быть) больше одной фотографии.
+    """
+    sight = models.ForeignKey('Post', on_delete=models.CASCADE, verbose_name="Достопримечательность")
+    image = models.ImageField('Изображение', upload_to='images/%Y/%m/%d/')
+    class Meta:
+        verbose_name = 'Фото'
+    def __str__(self):
+        return '{}'.format(self.id)
+

@@ -1,7 +1,12 @@
 ﻿{% extends "base_temp.html" %}
 
 {% block content %}<h1> {{ sight.name }} </h1>
-<h2><span class="text-hlight-1">{{ sight.city }}</span></h2>
-<p class="visit-num">{{ sight.get_type_display }}</p><br />
-<p>{{ sight.text }}</p>
+    <h2><span class="text-hlight-1">{{ sight.city }}</span></h2> 
+    <p class="visit-num">{{ sight.get_type_display }}</p><br />
+    <p>{{ sight.text }}</p>
+{% if sight.postimage_set %}
+    {% for image in sight.postimage_set.all %}
+        <img src="{{ image.image.url }}" height="400px">
+    {% endfor %}
+{% endif %}
 {% endblock %}

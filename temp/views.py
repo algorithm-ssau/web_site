@@ -35,15 +35,18 @@ def sight_view(request,id):
         'sight.html',
         context={'sight': sight}
     )
-class CityListView(generic.ListView):
+class FilteredListView(generic.ListView):
     """
     Отображает список достопримечательностей в конкретном городе.
     """
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(city__iexact=self.kwargs['city'])
+        # пока фильтр только по городу; когда появятся формы, можно будет добавить другие критерии
+        filtered_list = Post.objects.filter(city__iexact=self.kwargs['city'])
+        return filtered_list
+
     def get_context_data(self, **kwargs):
-        context = super(CityListView, self).get_context_data(**kwargs)
+        context = super(FilteredListView, self).get_context_data(**kwargs)
         context['city'] = self.kwargs['city']
         return context
