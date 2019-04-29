@@ -13,15 +13,22 @@ class Post(models.Model):
         ('a', 'Классическая архитектура'), # до 1940-50-х
         ('b', 'Современная архитектура'),
         ('c', 'Скульптура'),
-        ('d', 'Музеи'),
+        ('d', 'Музеи, выставки и галереи'),
         ('e', 'Театры'),
         ('f', 'Улицы, площади'),
-        ('g', 'Природа, парки') # "Природа"
+        ('g', 'Природные объекты'), # "Природа"
+        ('h', 'Развлечения')
     )
     
     name = models.CharField('Название', max_length=200) 
-    text = models.TextField('Описание')
     city = models.CharField('Город', max_length=50)
+    text = models.TextField('Описание')
+    more_text = models.TextField('Подробное описание', blank=True)
+    address = models.CharField('Адрес', blank=True, max_length=200)
+    opening_hours = models.CharField('Режим работы', blank=True, max_length=200)
+    phone = models.CharField('Телефон', blank=True, max_length=200)
+    website = models.CharField('Сайт', blank=True, max_length=200)
+    map_data = models.TextField('Карта', blank=True)
     type = models.CharField('Вид', max_length=1, choices=SIGHT_TYPES)
     times_visited = models.IntegerField()
     class Meta:
