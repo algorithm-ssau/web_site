@@ -1,12 +1,142 @@
 ﻿{% extends "base_temp.html" %}
-
-{% block content %}<h1> {{ sight.name }} </h1>
-    <h2><span class="text-hlight-1">{{ sight.city }}</span></h2> 
-    <p class="visit-num">{{ sight.get_type_display }}</p><br />
-    <p>{{ sight.text }}</p>
-{% if sight.postimage_set %}
-    {% for image in sight.postimage_set.all %}
-        <img src="{{ image.image.url }}" height="400px">
-    {% endfor %}
+{% block content %}
+<section class="engine"><a href="https://mobirise.info/u">bootstrap responsive templates</a></section>
+{% if first_image %}
+<section class="cid-rov0sI3jzj" id="image2-l">
+    <figure class="mbr-figure container">
+        <div class="image-block" style="width: 100%;">
+            <img src="{{ first_image.image.url }}" alt="Mobirise" title="">        
+        </div>
+    </figure>
+</section>
 {% endif %}
+<section class="mbr-section content4 cid-rov4qLPjw7" id="content4-u">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-8">
+                <h2 class="align-center pb-3 mbr-fonts-style display-2">{{ sight.name }}</h2>
+                <h3 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style display-5">{{ sight.city }}</h3>           
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section article content1 cid-rov14cKuj8" id="content1-r">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text col-12 mbr-fonts-style display-7 col-md-8"><p>{% autoescape off %}{{ sight.text }}{% endautoescape %}</p></div>
+        </div>
+    </div>
+</section>
+{% if other_images %}
+<section class="cid-rov0uelTBG" id="image4-m">
+    <!-- Block parameters controls (Blue "Gear" panel) -->
+
+    <!-- End block parameters -->
+    <div class="container images-container">
+        {% for imageleft, imageright in other_images %}
+            <div class="media-container-row" style="width: 1000px; padding-bottom:15px">
+                <div class="img-item item1">
+                    <img src="{{ imageleft.image.url }}" alt="" title="">
+                    
+                </div>
+                {% if imageright %}
+                <div class="img-item">
+                    <img src="{{ imageright.image.url }}" alt="" title="">                  
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% if sight.more_text %}
+<section class="mbr-section article content1 cid-rov2vcF5NV" id="content1-s">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text col-12 mbr-fonts-style display-7 col-md-8"><p>{% autoescape off %}{{ sight.more_text }}{% endautoescape %}</p></div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<section class="mbr-section contacts1 cid-rov2QAXsof" id="contacts1-t">
+    <!---->
+    
+    <!---->
+    <!--Overlay-->
+    
+    <!--Container-->
+    <div class="container">
+        <div class="row">
+            <!--Titles-->
+            <div class="title col-12">
+                
+                
+            </div>
+            {% if sight.opening_hours or sight.phone or sight.website or sight.address %}
+            <!--Left-->
+            <div class="col-12 col-md-6">
+                <div class="left-block wrapper">
+                   {% if sight.address %}
+                    <div class="b b-adress">
+                        <h5 class="align-left mbr-fonts-style m-0 display-5">
+                            Адрес:</h5>
+                        <p class="mbr-text align-left mbr-fonts-style display-7">
+                            {{ sight.address }}
+                        </p>
+                    </div>
+                  {% endif %}
+                  {% if sight.opening_hours %}
+                    <div class="b b-adress">
+                        <h5 class="align-left mbr-fonts-style m-0 display-5">
+                            Режим работы:</h5>
+                        <p class="mbr-text align-left mbr-fonts-style display-7">
+                            {% autoescape off %}{{ sight.opening_hours }}{% endautoescape %}
+                        </p>
+                    </div>
+                  {% endif %}
+                  {% if sight.phone %}
+                    <div class="b b-phone">
+                        <h5 class="align-left mbr-fonts-style m-0 display-5">
+                            Телефон:</h5>
+                        <p class="mbr-text align-left mbr-fonts-style display-7">
+                            {% autoescape off %}{{ sight.phone }}{% endautoescape %}
+                        </p>
+                    </div>
+                  {% endif %}
+                  {% if sight.website %}
+                    <div class="b b-mail">
+                        <h5 class="align-left mbr-fonts-style m-0 display-5">
+                            Официальный сайт:</h5>
+                        <p class="mbr-text align-left mbr-fonts-style display-7">
+                            <a href="{{ sight.website }}">{{ sight.website }}</a>
+                        </p>
+                    </div>
+                  {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if sight.map_data %}
+            <!--Right-->
+            <div class="col-12 col-md-6">
+                <div class="google-map">{% autoescape off %}{{ sight.map_data }}{% endautoescape %}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section once="footers" class="cid-rojp8wg0DH" id="footer6-k">
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="col-12">
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">Достопримечательности России 2019</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block extrascript %}
+  {% load static %}<script src="{% static 'assets/dropdown/js/script.min.js' %}"></script>
+  {% load static %}<script src="{% static 'assets/touchswipe/jquery.touch-swipe.min.js' %}"></script>
+  {% load static %}<script src="{% static 'assets/theme/js/script.js' %}"></script>
 {% endblock %}
