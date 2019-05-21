@@ -30,6 +30,16 @@ def categories(request):
         request,
         'cats.html'
     )
+def search(request):
+    return render(
+        request,
+        'search.html'
+    )
+def cities(request):
+    return render(
+        request,
+        'cities.html'
+    )
 def sight_view(request,id):
     try:
         sight=Post.objects.get(pk=id)
