@@ -32,7 +32,7 @@ class Post(models.Model):
     type = models.CharField('Вид', max_length=1, choices=SIGHT_TYPES)
     times_visited = models.IntegerField()
     class Meta:
-        ordering = ['city', 'type'] # либо times_visited
+        ordering = ['city', 'type'] # либо ['times_visited']
         verbose_name = 'Достопримечательность'
     def get_absolute_url(self):
         return reverse('sight', args=[str(self.id)])
@@ -42,7 +42,7 @@ class Post(models.Model):
 class PostImage(models.Model):
     """
     Изображение (фотография) туристического объекта.
-    У достопримечательности может быть (и, как правило, должно быть) больше одной фотографии.
+    У достопримечательности может быть (и, как правило, будет) больше одной фотографии.
     """
     sight = models.ForeignKey('Post', on_delete=models.CASCADE, verbose_name="Достопримечательность")
     image = models.ImageField('Изображение', upload_to='images/%Y/%m/%d/')

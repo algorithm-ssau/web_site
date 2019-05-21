@@ -78,12 +78,11 @@
             </div><!-- /.col-lg-6 -->
             <div class="col-lg-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Найти..." name="search_query">
+                  <form style="display:flex; margin-block-end: auto; align-items: stretch; flex-wrap: wrap;width: 100%" action="/temp/search/" method="get">
+                   <input type="text" class="form-control" placeholder="Найти..." name="q" style="border-top-right-radius: 0; border-bottom-right-radius: 0; position: relative; -ms-flex: 1 1 auto; flex: 1 1 auto; width: 1%; margin-bottom: 0">
                     <span class="input-group-btn">
-        <button class="btn btn-default" type="button"> <a class="nav-link link text-black display-4"
-                                                          href="/temp/search/">
-                            Поиск</a></button>
-      </span>
+        <input class="btn btn-default" type="submit" value="Поиск"> </input>
+      </span></form>
                 </div><!-- /input-group -->
 
 

@@ -1,26 +1,30 @@
-{% extends "base_temp.html" %}
+﻿{% extends "base_temp.html" %}
 
 {% block title %}<title>Поиск</title>{% endblock %}
 
-
 {% block content %}
    <div class="container" style="padding-bottom: 100px">
+    <h1 style="margin:100px 0 0 200px">{% if city %}Достопримечательности города {{ city }}
+    {% elif search_query %}{% if sights_list %}Результаты поиска для &laquo;{{ search_query }}&raquo;{% else %}По запросу &laquo;{{ search_query }}&raquo; результатов не найдено {% endif %}
+    {% elif sights_list %}{{ sights_list }}{% endif %}</h1>
+    {% if search_query %}
+    {% for sight in sights_list %}
     <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
         <div class="media-container-row">
             <div class="col-12 col-md-8">
                 <figure class="media-container-row">
                     <div class="mbr-figure" style="width: 80%;">
-                        <img src="{{ post.image.url }}https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
+                        <img src="{{ sight.postimage_set.first.image.url }}" alt="" style="width:320px"
                              title="">
                     </div>
                     <div class="media-content">
                         <div class="mbr-section-text">
                             <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="{{ post.get_absolute_url }}">
+                                <a class="nav-link link text-black display-4" href="{{ sight.get_absolute_url }}">
                                     <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
+                                                <strong>{{ sight.name }}</strong>
                                             </h2>
-                                    <p>Город</p>
+                                    <p>{{ sight.city }}</p>
                                 </a>
                         </div>
                     </div>
@@ -28,22 +32,25 @@
             </div>
         </div>
     </section>
+    {% endfor %}
+    {% else %}
+    {% for sight in post_list %}
     <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
         <div class="media-container-row">
             <div class="col-12 col-md-8">
                 <figure class="media-container-row">
                     <div class="mbr-figure" style="width: 80%;">
-                        <img src="https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
+                        <img src="{{ sight.postimage_set.first.image.url }}" alt="" style="width:320px"
                              title="">
                     </div>
                     <div class="media-content">
                         <div class="mbr-section-text">
                             <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="тут ссылка">
+                                <a class="nav-link link text-black display-4" href="{{ sight.get_absolute_url }}">
                                     <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
+                                                <strong>{{ sight.name }}</strong>
                                             </h2>
-                                    <p>Город</p>
+                                    <p>{{ sight.city }}</p>
                                 </a>
                         </div>
                     </div>
@@ -51,121 +58,8 @@
             </div>
         </div>
     </section>
-    <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
-        <div class="media-container-row">
-            <div class="col-12 col-md-8">
-                <figure class="media-container-row">
-                    <div class="mbr-figure" style="width: 80%;">
-                        <img src="https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
-                             title="">
-                    </div>
-                    <div class="media-content">
-                        <div class="mbr-section-text">
-                            <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="тут ссылка">
-                                    <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
-                                            </h2>
-                                    <p>Город</p>
-                                </a>
-                        </div>
-                    </div>
-                </figure>
-            </div>
-        </div>
-    </section>
-    <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
-        <div class="media-container-row">
-            <div class="col-12 col-md-8">
-                <figure class="media-container-row">
-                    <div class="mbr-figure" style="width: 80%;">
-                        <img src="https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
-                             title="">
-                    </div>
-                    <div class="media-content">
-                        <div class="mbr-section-text">
-                            <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="тут ссылка">
-                                    <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
-                                            </h2>
-                                    <p>Город</p>
-                                </a>
-                        </div>
-                    </div>
-                </figure>
-            </div>
-        </div>
-    </section>
-    <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
-        <div class="media-container-row">
-            <div class="col-12 col-md-8">
-                <figure class="media-container-row">
-                    <div class="mbr-figure" style="width: 80%;">
-                        <img src="https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
-                             title="">
-                    </div>
-                    <div class="media-content">
-                        <div class="mbr-section-text">
-                            <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="тут ссылка">
-                                    <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
-                                            </h2>
-                                    <p>Город</p>
-                                </a>
-                        </div>
-                    </div>
-                </figure>
-            </div>
-        </div>
-    </section>
-    <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
-        <div class="media-container-row">
-            <div class="col-12 col-md-8">
-                <figure class="media-container-row">
-                    <div class="mbr-figure" style="width: 80%;">
-                        <img src="https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
-                             title="">
-                    </div>
-                    <div class="media-content">
-                        <div class="mbr-section-text">
-                            <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="тут ссылка">
-                                    <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
-                                            </h2>
-                                    <p>Город</p>
-                                </a>
-                        </div>
-                    </div>
-                </figure>
-            </div>
-        </div>
-    </section>
-    <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
-        <div class="media-container-row">
-            <div class="col-12 col-md-8">
-                <figure class="media-container-row">
-                    <div class="mbr-figure" style="width: 80%;">
-                        <img src="https://bipbap.ru/wp-content/uploads/2017/10/0_8eb56_842bba74_XL-640x400.jpg" alt=""
-                             title="">
-                    </div>
-                    <div class="media-content">
-                        <div class="mbr-section-text">
-                            <p class="mbr-text mb-0 mbr-fonts-style display-7">
-                                <a class="nav-link link text-black display-4" href="тут ссылка">
-                                    <h2 class="mbr-fonts-style display-1">
-                                                <strong>Название достопримечательности{{ post.name }}</strong>
-                                            </h2>
-                                    <p>Город</p>
-                                </a>
-                        </div>
-                    </div>
-                </figure>
-            </div>
-        </div>
-    </section>
+    {% endfor %}
+    {% endif %}
    </div>
 
     <section once="footers" class="cid-rojp8wg0DH" id="footer6-4"style="position: absolute;bottom: 0;width: 100%;">
