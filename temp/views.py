@@ -46,8 +46,8 @@ def search(request):
     '''
     Отображает список 20 наиболее популярных достопримечательностей, соответствующих запросу
     '''
-    unedited_query = request.GET.get('q', '')
-    search_query3 = unedited_query.strip(',- ').lower()
+    unedited_query = request.GET.get('q', '').strip(',- ')
+    search_query3 = unedited_query.lower()
     search_query2 = search_query3.split(',')
     search_query1 = []
     search_query = []
