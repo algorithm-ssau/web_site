@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Post
 from django.http import Http404
-from django.db.models import F, Q
+from django.db.models import F
 
 # Create your views here.
 def index(request):
@@ -12,7 +12,6 @@ def index(request):
     Функция отображения для главной страницы сайта.
     """
     # Генерация "количеств" некоторых главных объектов
-    num_sights=Post.objects.all().count()
     popsightslist = Post.objects.order_by('-times_visited')
     most_visited=popsightslist.first().name
     mv_city = popsightslist.first().city
@@ -22,7 +21,7 @@ def index(request):
     return render(
         request,
         'index.html',
-        context={'num_sights':num_sights, 'most_visited':most_visited, 'mv_city':mv_city, 'image1':random_sights[0].postimage_set.first(), 'image2':random_sights[1].postimage_set.first(), 'image3':random_sights[2].postimage_set.first(), 'sight1':random_sights[0], 'sight2':random_sights[1], 'sight3':random_sights[2]}
+        context={'most_visited':most_visited, 'mv_city':mv_city, 'image1':random_sights[0].postimage_set.first(), 'image2':random_sights[1].postimage_set.first(), 'image3':random_sights[2].postimage_set.first(), 'sight1':random_sights[0], 'sight2':random_sights[1], 'sight3':random_sights[2]}
     )
 
 def categories(request):
@@ -47,7 +46,8 @@ def search(request):
     '''
     Отображает список 20 наиболее популярных достопримечательностей, соответствующих запросу
     '''
-    search_query3 = request.GET.get('q', '').strip(',- ').lower()
+    unedited_query = request.GET.get('q', '')
+    search_query3 = unedited_query.strip(',- ').lower()
     search_query2 = search_query3.split(',')
     search_query1 = []
     search_query = []
@@ -55,20 +55,24 @@ def search(request):
         search_query1.extend(str.split('-'))
     for str in search_query1:
         search_query.extend(str.split(' '))
-    # четырех слов хватит
-    laststr = search_query[len(search_query)-1]
-    for i in range(len(search_query), 4):
-        search_query.append(laststr)
+    search_query = search_query[:5] # пяти первых слов хватит
     if search_query[0] == '':
         return render(
             request,
             'search.html',
-            context={'sights_list': 'Ваш запрос пуст',}
+            context={'sights_list': 'Ваш запрос пуст'}
         )
-    # SQLite не поддерживает регистронезависимый поиск по кириллице, поэтому icontains бесполезен
     init_list = list(Post.objects.all().order_by('-times_visited'))
     filtered_list = []
+    # Сначала проверка по полному совпадению начала строки
     for sight in init_list:
+        sightname = sight.name.lower()
+        if sightname.startswith(search_query3):
+            filtered_list.append(sight)
+            init_list.remove(sight)
+    # Затем - по словам
+    for sight in init_list:
+        # SQLite не поддерживает регистронезависимый поиск по кириллице, поэтому icontains бесполезен
         sightwordslist1 = sight.name.lower().split('-')
         sightwordslist = []
         for str in sightwordslist1:
@@ -78,7 +82,7 @@ def search(request):
     return render(
         request,
         'search.html',
-        context={'sights_list': filtered_list, 'search_query':search_query3}
+        context={'sights_list': filtered_list, 'search_query':unedited_query}
     )
 
 def sight_view(request,id):
@@ -119,4 +123,6 @@ class FilteredListView(generic.ListView):
         context = super(FilteredListView, self).get_context_data(**kwargs)
         if 'city' in self.kwargs:
             context['city'] = self.kwargs['city']
+        else:
+            context[self.kwargs['category']] = 'yes'
         return context

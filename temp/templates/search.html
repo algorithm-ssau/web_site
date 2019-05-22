@@ -4,9 +4,11 @@
 
 {% block content %}
    <div class="container" style="padding-bottom: 100px">
-    <h1 style="margin:100px 0 0 200px">{% if city %}Достопримечательности города {{ city }}
+    <h1 style="margin:100px 0 0 200px">{% if city %}{{ city }}
     {% elif search_query %}{% if sights_list %}Результаты поиска для &laquo;{{ search_query }}&raquo;{% else %}По запросу &laquo;{{ search_query }}&raquo; результатов не найдено {% endif %}
-    {% elif sights_list %}{{ sights_list }}{% endif %}</h1>
+    {% elif sights_list %}{{ sights_list }}
+    {% elif a %}Классическая архитектура{% elif b %}Современная архитектура{% elif c %}Памятники, монументы, скульптуры{% elif d %}Музеи, выставки и галереи
+    {% elif e %}Театры и дворцы культуры{% elif f %}Известные улицы и площади{% elif g %}Парки, водоемы, уголки природы{% elif h %}Парки аттракционов<br />и другие развлечения{% endif %}</h1>
     {% if search_query %}
     {% for sight in sights_list %}
     <section class="cid-rov0sI3jzj" id="image" style="padding-bottom: 0;margin-top: 10px">
