@@ -1,5 +1,5 @@
 # The sights of Russia
-# About project
+## About project
 This project is an educational work of students of the Samara University, Faculty of Informatics, areas of fundamental informatics and information technology on the discipline practicum on a computer.
 Developers: Nesterova A. A., Nikolashin V. O., Smolev A. M.
 This project is the site about the sights of Russia. The site contains information on the most impressive places in Russia that should be visited by a tourist traveling through Russia.
